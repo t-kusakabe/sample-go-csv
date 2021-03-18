@@ -23,5 +23,6 @@ FROM alpine
 RUN apk add --no-cache ca-certificates
 
 COPY --from=builder /go/src/github.com/sample-go-csv/app /app
+COPY --from=builder /go/src/github.com/sample-go-csv/test.csv /test.csv
 
-ENTRYPOINT ["/app"]
+CMD ["/app"]
