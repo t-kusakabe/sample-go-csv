@@ -1,0 +1,28 @@
+version: "3.7"
+
+services:
+  go:
+    build:
+      context: .
+      dockerfile: ./docker/go/Dockerfile
+    container_name: go
+    volumes:
+      - type: bind
+        source: .
+        target: /go/src/github.com/sample-go-csv
+
+  mysql:
+    build:
+      context: .
+      dockerfile: ./docker/mysql/Dockerfile
+    container_name: mysql
+    ports:
+      - 3306:3306
+    volumes:
+      - mysql-data:/var/lib/mysql
+    environment:
+      MYSQL_USER: "root"
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+
+volumes:
+  mysql-data:
